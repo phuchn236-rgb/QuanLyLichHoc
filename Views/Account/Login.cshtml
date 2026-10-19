@@ -1,0 +1,24 @@
+@model LoginVM
+@{ ViewData["Title"] = L["Login"].Value; }
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-3 text-center"><i class="bi bi-box-arrow-in-right"></i> @L["LoginTitle"]</h4>
+        <form asp-action="Login" method="post">
+          <input type="hidden" asp-for="ReturnUrl" />
+          <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+          @if (!ViewData.ModelState.IsValid)
+          {
+              <div class="alert alert-danger py-2">
+                @foreach (var e in ViewData.ModelState.Values.SelectMany(v => v.Errors)) { <div>@e.ErrorMessage</div> }
+              </div>
+          }
+          <div class="mb-3"><label asp-for="TenDangNhap" class="form-label">@L["Username"]</label><input asp-for="TenDangNhap" class="form-control" autofocus required /></div>
+          <div class="mb-3"><label asp-for="MatKhau" class="form-label">@L["Password"]</label><input asp-for="MatKhau" class="form-control" required /></div>
+          <div class="form-check mb-3"><input asp-for="GhiNho" class="form-check-input" /><label asp-for="GhiNho" class="form-check-label">@L["RememberMe"]</label></div>
+          <button class="btn btn-primary w-100">@L["Login"]</button>
+        </form>
+      </div>
+    </div>
+    </div></div>

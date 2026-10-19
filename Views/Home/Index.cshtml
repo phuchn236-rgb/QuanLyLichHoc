@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = L["Home"].Value;
+    var hk = ViewBag.HocKy as HocKy;
+    bool staff = User.IsInRole("GiaoVu") || User.IsInRole("Admin");
+}
+<div class="p-4 p-lg-5 mb-4 bg-light rounded-3 border">
+  <h1 class="display-6 fw-bold">@L["Welcome"]</h1>
+  <p class="lead mb-2">@L["WelcomeSub"]</p>
+  @if (hk != null) { <p class="mb-3"><span class="badge text-bg-primary">@L["CurrentSemester"]: @hk.Ten</span> <span class="text-muted">(@hk.NgayBatDau.ToString("dd/MM/yyyy") – @hk.NgayKetThuc.ToString("dd/MM/yyyy"))</span></p> }
+  <a class="btn btn-primary btn-lg" asp-action="TraCuu"><i class="bi bi-search"></i> @L["Lookup"]</a>
+  @if (!User.Identity.IsAuthenticated) { <a class="btn btn-outline-primary btn-lg ms-2" asp-controller="Account" asp-action="Login">@L["Login"]</a> }
+  @if (User.IsInRole("SinhVien") || User.IsInRole("GiangVien")) { <a class="btn btn-outline-primary btn-lg ms-2" asp-controller="Timetable" asp-action="Index"><i class="bi bi-calendar3"></i> @L["Timetable"]</a> }
+  @if (User.IsInRole("SinhVien")) { <a class="btn btn-outline-success btn-lg ms-2" asp-controller="Registration" asp-action="Index">@L["Register"]</a> }
+</div>
+@if (staff)
+{
+  <div class="row g-3">
+    @foreach (var (label, val, icon, ctl) in new[] {
+        ((string)L["Students"].Value, (int)ViewBag.SoSV, "bi-mortarboard", "Students"), ((string)L["Lecturers"].Value, (int)ViewBag.SoGV, "bi-person-workspace", "Lecturers"),
+        ((string)L["Rooms"].Value, (int)ViewBag.SoPhong, "bi-building", "Rooms"), ((string)L["Sections"].Value, (int)ViewBag.SoLHP, "bi-journal-bookmark", "Sections"),
+        ((string)L["Schedules"].Value, (int)ViewBag.SoLich, "bi-calendar-check", "Schedules") })
+    {
+      <div class="col-6 col-md-4 col-xl"><a class="text-decoration-none" href="@Url.Action("Index", ctl)"><div class="card text-center h-100 shadow-sm"><div class="card-body"><i class="bi @icon fs-1 text-primary"></i><div class="fs-2 fw-bold">@val</div><div class="text-muted">@label</div></div></div></a></div>
+    }
+  </div>
+}

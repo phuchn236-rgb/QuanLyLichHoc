@@ -1,0 +1,13 @@
+@model List<SinhVien>
+@{ var l = (LopHocPhan)ViewBag.LHP; ViewData["Title"] = l.MaLHP; }
+<div class="d-flex justify-content-between align-items-center mb-3 no-print">
+  <h3 class="mb-0">@l.MaLHP – @l.MonHoc.TenMH</h3>
+  <div><button class="btn btn-outline-secondary" onclick="window.print()"><i class="bi bi-printer"></i> @L["Print"]</button> <a class="btn btn-outline-primary" asp-action="Classes">&laquo; @L["MyClasses"]</a></div>
+</div>
+<table class="table table-striped align-middle">
+  <thead class="table-primary"><tr><th>#</th><th>Mã SV</th><th>Họ tên</th><th>Lớp</th><th>Email</th></tr></thead>
+  <tbody>
+  @for (int i = 0; i < Model.Count; i++) { var s = Model[i]; <tr><td>@(i + 1)</td><td>@s.MaSV</td><td>@s.HoTen</td><td>@s.Lop?.TenLop</td><td>@s.Email</td></tr> }
+  @if (Model.Count == 0) { <tr><td colspan="5" class="text-center text-muted">@L["NoData"]</td></tr> }
+  </tbody>
+</table>

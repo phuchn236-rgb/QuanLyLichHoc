@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = L["Reports"].Value;
+    var rooms = (List<ReportRow>)ViewBag.Rooms; var lecs = (List<ReportRow>)ViewBag.Lecturers;
+    int maHK = (int)ViewBag.MaHK;
+}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
+  <h3 class="mb-0"><i class="bi bi-bar-chart"></i> @L["Reports"]</h3>
+  <form method="get" class="d-flex gap-2"><select name="maHK" class="form-select" asp-items="(IEnumerable<SelectListItem>)ViewBag.HocKys" onchange="this.form.submit()"></select>
+    <button type="button" class="btn btn-outline-secondary" onclick="window.print()"><i class="bi bi-printer"></i> @L["Print"]</button></form>
+</div>
+<div class="row g-4">
+  <div class="col-12 col-xl-6">
+    <div class="card"><div class="card-header d-flex justify-content-between"><b>Công suất sử dụng phòng học</b>
+      <a class="btn btn-sm btn-outline-success no-print" asp-action="ExportCsv" asp-route-maHK="@maHK" asp-route-loai="phong"><i class="bi bi-file-earmark-excel"></i> Excel (CSV)</a></div>
+      <div class="card-body"><canvas id="chartRooms" height="200"></canvas></div>
+      <table class="table table-sm mb-0"><thead><tr><th>Phòng</th><th>Buổi/tuần</th><th>Tiết/tuần</th><th>Tổng tiết HK</th><th>Công suất</th></tr></thead><tbody>
+      @foreach (var r in rooms) { <tr><td>@r.Ten</td><td>@r.SoBuoi</td><td>@r.TietTuan</td><td>@r.TongTiet</td><td>@r.TyLe.ToString("0.#")%</td></tr> }
+      </tbody></table></div>
+  </div>
+  <div class="col-12 col-xl-6">
+    <div class="card"><div class="card-header d-flex justify-content-between"><b>Khối lượng giảng dạy của giảng viên</b>
+      <a class="btn btn-sm btn-outline-success no-print" asp-action="ExportCsv" asp-route-maHK="@maHK" asp-route-loai="giangvien"><i class="bi bi-file-earmark-excel"></i> Excel (CSV)</a></div>
+      <div class="card-body"><canvas id="chartLec" height="200"></canvas></div>
+      <table class="table table-sm mb-0"><thead><tr><th>Giảng viên</th><th>Buổi/tuần</th><th>Tiết/tuần</th><th>Tổng tiết HK</th></tr></thead><tbody>
+      @foreach (var r in lecs) { <tr><td>@r.Ten</td><td>@r.SoBuoi</td><td>@r.TietTuan</td><td>@r.TongTiet</td></tr> }
+      @if (lecs.Count == 0) { <tr><td colspan="4" class="text-center text-muted">@L["NoData"]</td></tr> }
+      </tbody></table></div>
+  </div>
+</div>
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+new Chart(document.getElementById('chartRooms'), { type: 'bar',
+  data: { labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(rooms.Select(r => r.Ten))), datasets: [{ label: 'Công suất (%)', data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(rooms.Select(r => r.TyLe))), backgroundColor: '#0d6efd' }] },
+  options: { scales: { y: { beginAtZero: true, max: 100 } } } });
+new Chart(document.getElementById('chartLec'), { type: 'bar',
+  data: { labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(lecs.Select(r => r.Ten))), datasets: [{ label: 'Tổng số tiết học kỳ', data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(lecs.Select(r => r.TongTiet))), backgroundColor: '#198754' }] },
+  options: { indexAxis: 'y', scales: { x: { beginAtZero: true } } } });
+</script>
+}

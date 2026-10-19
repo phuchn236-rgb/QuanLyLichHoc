@@ -1,0 +1,37 @@
+@model IPaged
+@{
+    var ctrl = (string)ViewData["Controller"];
+    var filterPartial = ViewData["FilterPartial"] as string;
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">@ViewData["Title"]</h3>
+    <button class="btn btn-success" id="btnAdd"><i class="bi bi-plus-lg"></i> @L["Add"]</button>
+</div>
+
+<div id="crud" data-ajax-list data-url="@Url.Action("Index", ctrl)" data-form="#filterForm" data-controller="@ctrl">
+    <form id="filterForm" class="row g-2 mb-3">
+        <div class="col-12 col-md-4"><input type="text" name="q" value="@ViewData["Q"]" class="form-control" placeholder="@L["SearchHint"]" /></div>
+        @if (filterPartial != null) { @await Html.PartialAsync(filterPartial) }
+        <div class="col-auto"><button type="submit" class="btn btn-primary"><i class="bi bi-funnel"></i> @L["Filter"]</button></div>
+    </form>
+    <div class="list-container table-responsive">@await Html.PartialAsync("_Table", Model)</div>
+</div>
+
+<div class="modal fade" id="crudModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">@ViewData["Title"]</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body">
+        <form id="crudForm" autocomplete="off">
+          <input type="hidden" name="isNew" id="isNew" value="true" />
+          <div id="crudFields"></div>
+        </form>
+        <div id="formErrors" class="alert alert-danger mt-3 d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@L["Cancel"]</button>
+        <button type="button" class="btn btn-primary" id="btnSave"><i class="bi bi-check-lg"></i> @L["Save"]</button>
+      </div>
+    </div>
+  </div>
+</div>

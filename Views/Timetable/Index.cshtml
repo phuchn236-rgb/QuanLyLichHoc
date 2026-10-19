@@ -1,0 +1,18 @@
+@{ ViewData["Title"] = L["Timetable"].Value; }
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
+  <h3 class="mb-0"><i class="bi bi-calendar3"></i> @L["Timetable"]</h3>
+  <div class="d-flex flex-wrap gap-2 align-items-center">
+    <select id="selHK" class="form-select w-auto" asp-items="(IEnumerable<SelectListItem>)ViewBag.HocKys"></select>
+    <div class="btn-group">
+      <button class="btn btn-outline-primary" id="btnPrev" title="@L["PrevWeek"]"><i class="bi bi-chevron-left"></i></button>
+      <span class="btn btn-light disabled">@L["Week"] <span id="lblTuan"></span></span>
+      <button class="btn btn-outline-primary" id="btnNext" title="@L["NextWeek"]"><i class="bi bi-chevron-right"></i></button>
+    </div>
+    <button class="btn btn-outline-secondary" onclick="window.print()"><i class="bi bi-printer"></i> @L["Print"]</button>
+  </div>
+</div>
+<p class="text-muted" id="lblRange"></p>
+<div class="table-responsive">
+  <table id="tkbGrid" class="table table-bordered tkb text-center" data-endpoint="@ViewBag.Endpoint" data-mahk="@ViewBag.MaHK" data-tuan="@ViewBag.Tuan"></table>
+</div>
+@section Scripts { <script src="~/js/timetable.js" asp-append-version="true"></script> }

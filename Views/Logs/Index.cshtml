@@ -1,0 +1,10 @@
+@model PaginatedList<NhatKy>
+@{ ViewData["Title"] = L["Logs"].Value; }
+<h3 class="mb-3"><i class="bi bi-journal-text"></i> @L["Logs"]</h3>
+<div data-ajax-list data-url="@Url.Action("Index", "Logs")" data-form="#filterForm">
+  <form id="filterForm" class="row g-2 mb-3">
+    <div class="col-12 col-md-4"><input name="q" class="form-control" placeholder="@L["SearchHint"]" /></div>
+    <div class="col-auto"><button class="btn btn-primary" type="submit"><i class="bi bi-funnel"></i> @L["Filter"]</button></div>
+  </form>
+  <div class="list-container table-responsive">@await Html.PartialAsync("_Table", Model)</div>
+</div>

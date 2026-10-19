@@ -1,0 +1,11 @@
+@model LopHocPhan
+@{ bool isNew = (bool)ViewData["IsNew"]; }
+
+<div class="row g-3">
+    <div class="col-md-4"><label asp-for="MaLHP" class="form-label"></label><input asp-for="MaLHP" type="text" class="form-control" readonly="@(!isNew)" /></div>
+    <div class="col-md-8"><label asp-for="MaMH" class="form-label"></label><select asp-for="MaMH" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Mons)" class="form-select"></select></div>
+    <div class="col-md-6"><label asp-for="MaGV" class="form-label"></label><select asp-for="MaGV" asp-items="@((IEnumerable<SelectListItem>)ViewBag.GVs)" class="form-select"></select></div>
+    <div class="col-md-6"><label asp-for="MaHK" class="form-label"></label><select asp-for="MaHK" asp-items="@((IEnumerable<SelectListItem>)ViewBag.HocKys)" class="form-select"></select></div>
+    <div class="col-md-6"><label asp-for="SiSoToiDa" class="form-label"></label><input asp-for="SiSoToiDa" type="number" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="TrangThai" class="form-label"></label><select asp-for="TrangThai" asp-items="@((IEnumerable<SelectListItem>)ViewBag.TrangThais)" class="form-select"></select></div>
+</div>

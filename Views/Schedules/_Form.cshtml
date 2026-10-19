@@ -1,0 +1,14 @@
+@model LichHoc
+@{ bool isNew = (bool)ViewData["IsNew"]; }
+<input asp-for="MaLich" type="hidden" />
+<div class="row g-3">
+    <div class="col-md-12"><label asp-for="MaLHP" class="form-label"></label><select asp-for="MaLHP" asp-items="@((IEnumerable<SelectListItem>)ViewBag.LHPs)" class="form-select" data-check="1"></select></div>
+    <div class="col-md-6"><label asp-for="MaPhong" class="form-label"></label><select asp-for="MaPhong" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Phongs)" class="form-select" data-check="1"></select></div>
+    <div class="col-md-6"><label asp-for="Thu" class="form-label"></label><select asp-for="Thu" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Thus)" class="form-select" data-check="1"></select></div>
+    <div class="col-md-4"><label asp-for="TietBatDau" class="form-label"></label><input asp-for="TietBatDau" type="number" class="form-control" data-check="1" /></div>
+    <div class="col-md-4"><label asp-for="SoTiet" class="form-label"></label><input asp-for="SoTiet" type="number" class="form-control" data-check="1" /></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-6"><label asp-for="TuanBatDau" class="form-label"></label><input asp-for="TuanBatDau" type="number" class="form-control" data-check="1" /></div>
+    <div class="col-md-6"><label asp-for="TuanKetThuc" class="form-label"></label><input asp-for="TuanKetThuc" type="number" class="form-control" data-check="1" /></div>
+</div>
+<div id="checkInfo" class="alert alert-warning mt-3 d-none" data-check-url="@Url.Action("Check", "Schedules")"></div>

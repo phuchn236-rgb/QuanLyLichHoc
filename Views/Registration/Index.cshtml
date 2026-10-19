@@ -1,0 +1,24 @@
+@model PaginatedList<RegRow>
+@{ ViewData["Title"] = L["Register"].Value; }
+<h3 class="mb-3"><i class="bi bi-journal-check"></i> @L["Register"]</h3>
+<div id="reg" data-ajax-list data-url="@Url.Action("Index", "Registration")" data-form="#filterForm">
+  <form id="filterForm" class="row g-2 mb-3">
+    <div class="col-12 col-md-4"><input name="q" class="form-control" placeholder="@L["SearchHint"]" /></div>
+    <div class="col-6 col-md-3"><select name="maHK" class="form-select" asp-items="(IEnumerable<SelectListItem>)ViewBag.HocKys"></select></div>
+    <div class="col-auto d-flex align-items-center"><div class="form-check"><input class="form-check-input" type="checkbox" name="chiDaDangKy" value="true" id="chkMine" /><label class="form-check-label" for="chkMine">@L["OnlyRegistered"]</label></div></div>
+    <div class="col-auto"><button class="btn btn-primary" type="submit"><i class="bi bi-funnel"></i> @L["Filter"]</button></div>
+  </form>
+  <div class="list-container table-responsive">@await Html.PartialAsync("_Table", Model)</div>
+</div>
+@section Scripts {
+<script>
+$(document).on('click', '.btn-reg, .btn-unreg', function () {
+    var $b = $(this), url = $b.hasClass('btn-reg') ? '/Registration/Register' : '/Registration/Unregister';
+    $b.prop('disabled', true);
+    $.post(url, { maLHP: $b.data('id') }, function (r) {
+        showToast(r.message, r.ok);
+        AjaxList.reload($('#reg'));
+    });
+});
+</script>
+}

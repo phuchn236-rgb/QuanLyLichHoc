@@ -1,0 +1,18 @@
+@model PaginatedList<LopHocPhan>
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-primary"><tr><th>Mã LHP</th><th>Môn học</th><th>Giảng viên</th><th>Học kỳ</th><th>Sĩ số</th><th>Trạng thái</th><th class="text-end">@L["Actions"]</th></tr></thead>
+    <tbody>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@(x.MaLHP)</td><td>@(x.MonHoc?.TenMH)</td><td>@(x.GiangVien?.HoTen)</td><td>@(x.HocKy?.Ten)</td><td>@(x.DangKys.Count + "/" + x.SiSoToiDa)</td><td>@(x.TrangThai)</td>
+            <td class="text-end text-nowrap">
+                <button type="button" class="btn btn-sm btn-outline-primary btn-edit" data-id="@x.MaLHP" title="@L["Edit"]"><i class="bi bi-pencil"></i></button>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-del" data-id="@x.MaLHP" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    }
+    @if (Model.Count == 0) { <tr><td colspan="7" class="text-center text-muted">@L["NoData"]</td></tr> }
+    </tbody>
+</table>
+<partial name="_Pager" model="Model" />

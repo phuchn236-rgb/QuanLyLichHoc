@@ -1,0 +1,18 @@
+@model PaginatedList<SinhVien>
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-primary"><tr><th>Mã SV</th><th>Họ tên</th><th>Ngày sinh</th><th>Email</th><th>Lớp</th><th class="text-end">@L["Actions"]</th></tr></thead>
+    <tbody>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@(x.MaSV)</td><td>@(x.HoTen)</td><td>@(x.NgaySinh.ToString("dd/MM/yyyy"))</td><td>@(x.Email)</td><td>@(x.Lop?.TenLop)</td>
+            <td class="text-end text-nowrap">
+                <button type="button" class="btn btn-sm btn-outline-primary btn-edit" data-id="@x.MaSV" title="@L["Edit"]"><i class="bi bi-pencil"></i></button>
+                <button type="button" class="btn btn-sm btn-outline-danger btn-del" data-id="@x.MaSV" title="@L["Delete"]"><i class="bi bi-trash"></i></button>
+            </td>
+        </tr>
+    }
+    @if (Model.Count == 0) { <tr><td colspan="6" class="text-center text-muted">@L["NoData"]</td></tr> }
+    </tbody>
+</table>
+<partial name="_Pager" model="Model" />

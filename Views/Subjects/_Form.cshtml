@@ -1,0 +1,11 @@
+@model MonHoc
+@{ bool isNew = (bool)ViewData["IsNew"]; }
+
+<div class="row g-3">
+    <div class="col-md-4"><label asp-for="MaMH" class="form-label"></label><input asp-for="MaMH" type="text" class="form-control" readonly="@(!isNew)" /></div>
+    <div class="col-md-8"><label asp-for="TenMH" class="form-label"></label><input asp-for="TenMH" type="text" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="SoTinChi" class="form-label"></label><input asp-for="SoTinChi" type="number" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="SoTiet" class="form-label"></label><input asp-for="SoTiet" type="number" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="MaKhoa" class="form-label"></label><select asp-for="MaKhoa" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Khoas)" class="form-select"></select></div>
+    <div class="col-md-12"><div class="form-check"><input asp-for="ThucHanh" class="form-check-input" /><label asp-for="ThucHanh" class="form-check-label"></label></div></div>
+</div>

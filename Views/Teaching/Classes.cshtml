@@ -1,0 +1,19 @@
+@model List<LopHocPhan>
+@{ ViewData["Title"] = L["MyClasses"].Value; }
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0"><i class="bi bi-people"></i> @L["MyClasses"]</h3>
+  <form method="get"><select name="maHK" class="form-select" asp-items="(IEnumerable<SelectListItem>)ViewBag.HocKys" onchange="this.form.submit()"></select></form>
+</div>
+<table class="table table-striped table-hover align-middle">
+  <thead class="table-primary"><tr><th>@L["Section"]</th><th>@L["Subject"]</th><th>@L["Time"]</th><th>@L["Capacity"]</th><th>@L["Status"]</th><th></th></tr></thead>
+  <tbody>
+  @foreach (var l in Model)
+  {
+    <tr><td>@l.MaLHP</td><td>@l.MonHoc.TenMH</td>
+        <td class="small">@string.Join("; ", l.LichHocs.OrderBy(x => x.Thu).Select(x => $"{TkbHelper.ThuText(x.Thu)} tiết {x.TietBatDau}-{x.TietBatDau + x.SoTiet - 1} ({x.PhongHoc.TenPhong})"))</td>
+        <td>@l.DangKys.Count/@l.SiSoToiDa</td><td>@l.TrangThai</td>
+        <td class="text-end"><a class="btn btn-sm btn-outline-primary" asp-action="Students" asp-route-id="@l.MaLHP"><i class="bi bi-list-ul"></i> @L["Students"]</a></td></tr>
+  }
+  @if (Model.Count == 0) { <tr><td colspan="6" class="text-center text-muted">@L["NoData"]</td></tr> }
+  </tbody>
+</table>

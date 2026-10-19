@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AppName" xml:space="preserve"><value>Class Schedule Manager</value></data>
+  <data name="Home" xml:space="preserve"><value>Home</value></data>
+  <data name="Timetable" xml:space="preserve"><value>Timetable</value></data>
+  <data name="Register" xml:space="preserve"><value>Course registration</value></data>
+  <data name="Lookup" xml:space="preserve"><value>Schedule lookup</value></data>
+  <data name="Login" xml:space="preserve"><value>Sign in</value></data>
+  <data name="Logout" xml:space="preserve"><value>Sign out</value></data>
+  <data name="Profile" xml:space="preserve"><value>My profile</value></data>
+  <data name="Hello" xml:space="preserve"><value>Hello</value></data>
+  <data name="Search" xml:space="preserve"><value>Search</value></data>
+  <data name="SearchHint" xml:space="preserve"><value>Keyword...</value></data>
+  <data name="Filter" xml:space="preserve"><value>Filter</value></data>
+  <data name="Add" xml:space="preserve"><value>Add new</value></data>
+  <data name="Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Close" xml:space="preserve"><value>Close</value></data>
+  <data name="Print" xml:space="preserve"><value>Print / Save PDF</value></data>
+  <data name="Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Total" xml:space="preserve"><value>Total</value></data>
+  <data name="NoData" xml:space="preserve"><value>No data</value></data>
+  <data name="ConfirmDelete" xml:space="preserve"><value>Are you sure you want to delete?</value></data>
+  <data name="Saved" xml:space="preserve"><value>Saved successfully</value></data>
+  <data name="Deleted" xml:space="preserve"><value>Deleted</value></data>
+  <data name="Semester" xml:space="preserve"><value>Semester</value></data>
+  <data name="Week" xml:space="preserve"><value>Week</value></data>
+  <data name="Day" xml:space="preserve"><value>Day</value></data>
+  <data name="Period" xml:space="preserve"><value>Period</value></data>
+  <data name="Room" xml:space="preserve"><value>Room</value></data>
+  <data name="Lecturer" xml:space="preserve"><value>Lecturer</value></data>
+  <data name="Subject" xml:space="preserve"><value>Subject</value></data>
+  <data name="Section" xml:space="preserve"><value>Section</value></data>
+  <data name="Time" xml:space="preserve"><value>Time</value></data>
+  <data name="Weeks" xml:space="preserve"><value>Weeks</value></data>
+  <data name="All" xml:space="preserve"><value>All</value></data>
+  <data name="Username" xml:space="preserve"><value>Username</value></data>
+  <data name="Password" xml:space="preserve"><value>Password</value></data>
+  <data name="RememberMe" xml:space="preserve"><value>Remember me</value></data>
+  <data name="LoginTitle" xml:space="preserve"><value>Sign in to the system</value></data>
+  <data name="DemoAccounts" xml:space="preserve"><value>Demo accounts</value></data>
+  <data name="Catalogs" xml:space="preserve"><value>Catalogs</value></data>
+  <data name="Training" xml:space="preserve"><value>Training</value></data>
+  <data name="Rooms" xml:space="preserve"><value>Rooms</value></data>
+  <data name="Subjects" xml:space="preserve"><value>Subjects</value></data>
+  <data name="Semesters" xml:space="preserve"><value>Semesters</value></data>
+  <data name="Faculties" xml:space="preserve"><value>Faculties</value></data>
+  <data name="Classes" xml:space="preserve"><value>Classes</value></data>
+  <data name="Lecturers" xml:space="preserve"><value>Lecturers</value></data>
+  <data name="Students" xml:space="preserve"><value>Students</value></data>
+  <data name="Sections" xml:space="preserve"><value>Sections</value></data>
+  <data name="Schedules" xml:space="preserve"><value>Scheduling</value></data>
+  <data name="Users" xml:space="preserve"><value>Accounts</value></data>
+  <data name="Reports" xml:space="preserve"><value>Reports</value></data>
+  <data name="Logs" xml:space="preserve"><value>Audit log</value></data>
+  <data name="MyClasses" xml:space="preserve"><value>My classes</value></data>
+  <data name="Busy" xml:space="preserve"><value>Busy times</value></data>
+  <data name="Welcome" xml:space="preserve"><value>Welcome to the class schedule management system</value></data>
+  <data name="WelcomeSub" xml:space="preserve"><value>Plan schedules, register for courses and look up timetables quickly with no conflicts.</value></data>
+  <data name="CurrentSemester" xml:space="preserve"><value>Current semester</value></data>
+  <data name="PrevWeek" xml:space="preserve"><value>Previous week</value></data>
+  <data name="NextWeek" xml:space="preserve"><value>Next week</value></data>
+  <data name="Credits" xml:space="preserve"><value>Credits</value></data>
+  <data name="Capacity" xml:space="preserve"><value>Enrolled</value></data>
+  <data name="Status" xml:space="preserve"><value>Status</value></data>
+  <data name="Unregister" xml:space="preserve"><value>Unregister</value></data>
+  <data name="OnlyRegistered" xml:space="preserve"><value>Registered only</value></data>
+  <data name="AccessDenied" xml:space="preserve"><value>You do not have permission to access this page</value></data>
+  <data name="ChangePassword" xml:space="preserve"><value>Change password</value></data>
+  <data name="CurrentPassword" xml:space="preserve"><value>Current password</value></data>
+  <data name="NewPassword" xml:space="preserve"><value>New password</value></data>
+  <data name="ConfirmPassword" xml:space="preserve"><value>Confirm new password</value></data>
+  <data name="Footer" xml:space="preserve"><value>Web Programming Course Project</value></data>
+</root>
