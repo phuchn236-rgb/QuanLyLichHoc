@@ -21,7 +21,6 @@ Muốn nạp lại dữ liệu mẫu: dừng ứng dụng, xóa tệp `lichhoc.d
 | Vai trò | Tên đăng nhập | Mật khẩu |
 |---|---|---|
 | Quản trị viên | admin | Admin@123 |
-| Giáo vụ | giaovu | GiaoVu@123 |
 | Giảng viên | gv001 … gv005 | GiangVien@123 |
 | Sinh viên | sv001 … sv020 | SinhVien@123 |
 
