@@ -70,12 +70,12 @@ QuanLyLichHoc/
 |---|---|---|
 | GET | `/api/schedules?hocKy=&gv=&phong=&page=&size=` | Đã đăng nhập |
 | GET | `/api/schedules/{id}` | Đã đăng nhập |
-| POST | `/api/schedules` (201 / 409 Conflict) | Giáo vụ, Admin |
-| PUT | `/api/schedules/{id}` (204 / 409) | Giáo vụ, Admin |
-| DELETE | `/api/schedules/{id}` (204) | Giáo vụ, Admin |
-| GET | `/api/students/{maSV}/timetable?maHK=&tuan=` | SV (của mình), Giáo vụ, Admin |
-| GET | `/api/lecturers/{maGV}/timetable?maHK=&tuan=` | GV (của mình), Giáo vụ, Admin |
-| GET | `/api/rooms/available?maHK=&thu=&tiet=&soTiet=&tuan=` | Giáo vụ, Admin |
+| POST | `/api/schedules` (201 / 409 Conflict) |  Admin |
+| PUT | `/api/schedules/{id}` (204 / 409) | Admin |
+| DELETE | `/api/schedules/{id}` (204) |  Admin |
+| GET | `/api/students/{maSV}/timetable?maHK=&tuan=` | SV (của mình),  Admin |
+| GET | `/api/lecturers/{maGV}/timetable?maHK=&tuan=` | GV (của mình), Admin |
+| GET | `/api/rooms/available?maHK=&thu=&tiet=&soTiet=&tuan=` | Admin |
 | GET | `/api/csrf` | Đã đăng nhập |
 
 API dùng cookie đăng nhập. **Gọi từ Postman:** (1) POST form `/Account/Login` (lấy token từ trang đăng nhập) hoặc đăng nhập bằng trình duyệt rồi dùng cùng cookie;
@@ -91,23 +91,13 @@ Body mẫu POST `/api/schedules`:
 - **Tự nối lại tài khoản với sinh viên/giảng viên** nếu liên kết bị thiếu (nguyên nhân khiến trang sinh viên trống).
 - **Báo cáo:** viết lại bằng truy vấn projection (không còn NullReferenceException), thêm thẻ thống kê và bảng *Sĩ số các lớp học phần*.
 
-## 9. Cập nhật v1.2
-- Trang *Đăng ký học phần* ghép dữ liệu trong bộ nhớ (không phụ thuộc join điều hướng) nên không còn lỗi `Nullable object must have a value` khi dữ liệu bị lệch.
-- Thêm trang **Báo cáo → Kiểm tra dữ liệu** (Admin/Giáo vụ): liệt kê bản ghi thiếu liên kết và có nút xóa các bản ghi lỗi.
 
-## 10. Cập nhật v1.3
-- **Sửa gốc lỗi dữ liệu:** khai báo tường minh mọi khóa ngoại trong `AppDbContext` (trước đây EF không nối được `MaMH`, `MaGV`, `MaPhong`, `MaLHP`, `MaHK` với các thuộc tính điều hướng nên môn học/giảng viên bị trống, thời khóa biểu trống, sĩ số luôn 0).
-- Các truy vấn quan trọng (thời khóa biểu, đăng ký, kiểm tra xung đột, tra cứu, báo cáo) chỉ dựa trên khóa nên luôn đúng.
-- **Tự khắc phục CSDL SQLite cũ bị lệch:** khi khởi động, nếu phát hiện dữ liệu lệch, hệ thống sao lưu `lichhoc.db.bak` rồi tạo lại từ dữ liệu mẫu.
-- **Đăng ký học phần lưu ngay** vào thời khóa biểu cá nhân; sĩ số lớp học phần, thẻ tổng kết và báo cáo cập nhật tức thì.
-- **Tra cứu lịch học của Admin/Giáo vụ:** hiện tên sinh viên đăng ký từng lớp, bấm *Xem tất cả* để xem danh sách và *Xem lịch học* để mở thời khóa biểu của từng sinh viên.
-- **Báo cáo:** thêm số sinh viên đã đăng ký, nút xem danh sách sinh viên theo từng lớp học phần.
 
-## 11. Cơ sở dữ liệu (SQL Server)
+## 9. Cơ sở dữ liệu (SQL Server)
 Thư mục `Database/` chứa script tạo bảng, ràng buộc, view, thủ tục và dữ liệu mẫu. Xem hướng dẫn chi tiết trong `Database/README.md`.
 Tóm tắt: chạy `tao_csdl.sql` rồi `du_lieu_mau.sql` trong SSMS, sau đó đặt `"Database": { "Provider": "SqlServer" }` và chuỗi kết nối trong `appsettings.json`.
 
-## 12. Kiến trúc: controller làm việc trực tiếp với DbContext (v1.5)
+## 10. Kiến trúc: controller làm việc trực tiếp với DbContext (v1.5)
 - **Không còn lớp Service.** Mỗi controller tự khai báo `private readonly AppDbContext db;` (nhận qua constructor) và viết truy vấn LINQ trực tiếp trong controller.
 - Nghiệp vụ nằm ngay trong controller liên quan:
   - `SchedulesController` + `LichHocApiController`: kiểm tra xung đột lịch (trùng phòng, giảng viên, sinh viên, lịch bận, sức chứa, loại phòng).
@@ -117,7 +107,7 @@ Tóm tắt: chạy `tao_csdl.sql` rồi `du_lieu_mau.sql` trong SSMS, sau đó �
 - Chỉ còn các tiện ích **không truy cập CSDL**: `TkbHelper` (định dạng thứ/tiết, kiểm tra giao nhau), `PasswordHasher` (băm mật khẩu).
 - Hệ quả: khi bạn đổi cơ sở dữ liệu hay mô hình, chỉ cần sửa `Data/AppDbContext.cs` và các controller tương ứng, không có lớp trung gian nào cần sửa theo.
 
-## 13. Lưu ý
+## 11. Lưu ý
 - Khi triển khai thật: bật HTTPS, đặt `CookieSecurePolicy.Always` trong `Program.cs`, đổi mật khẩu các tài khoản mẫu.
 - Xuất báo cáo: CSV (mở bằng Excel). PDF: dùng nút "In / Lưu PDF" của trình duyệt (đã có CSS in).
 - Nhãn của các biểu mẫu danh mục lấy từ `[Display(Name=...)]` (tiếng Việt); muốn đa ngôn ngữ hóa thêm, bổ sung khóa vào `Resources/*.resx` và dùng `@L["Khoa"]` trong view.
