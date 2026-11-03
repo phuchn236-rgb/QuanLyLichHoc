@@ -1,0 +1,20 @@
+@model List<StudentRow>
+@{ int maHK = (int)ViewBag.MaHK; }
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h6 class="mb-0">@ViewBag.Title</h6>
+  <span class="badge text-bg-primary">@Model.Count / @ViewBag.SiSoToiDa sinh viên</span>
+</div>
+<div class="table-responsive">
+<table class="table table-sm table-striped align-middle mb-0">
+  <thead><tr><th>#</th><th>Mã SV</th><th>Họ tên</th><th>Lớp</th><th>Email</th><th></th></tr></thead>
+  <tbody>
+  @for (int i = 0; i < Model.Count; i++)
+  {
+    var s = Model[i];
+    <tr><td>@(i + 1)</td><td>@s.MaSV</td><td>@s.HoTen</td><td>@s.Lop</td><td class="small">@s.Email</td>
+        <td class="text-end"><a class="btn btn-sm btn-outline-primary" asp-controller="Timetable" asp-action="Student" asp-route-maSV="@s.MaSV" asp-route-maHK="@maHK"><i class="bi bi-calendar3"></i> Xem lịch học</a></td></tr>
+  }
+  @if (Model.Count == 0) { <tr><td colspan="6" class="text-center text-muted">Chưa có sinh viên đăng ký lớp này.</td></tr> }
+  </tbody>
+</table>
+</div>

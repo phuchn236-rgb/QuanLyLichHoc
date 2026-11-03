@@ -1,0 +1,46 @@
+@model PaginatedList<RegRow>
+@{ ViewData["Title"] = L["Register"].Value; }
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <h3 class="mb-0"><i class="bi bi-journal-check"></i> @L["Register"]</h3>
+  <div class="d-flex gap-2">
+    <span class="badge text-bg-primary fs-6">Đã chọn: <span id="badgeHP">@ViewBag.SoHP</span> học phần</span>
+    <span class="badge text-bg-success fs-6"><span id="badgeTC">@ViewBag.SoTC</span> tín chỉ</span>
+  </div>
+</div>
+<div class="row g-4">
+  <div class="col-12 col-xl-7">
+    <div id="reg" data-ajax-list data-url="@Url.Action("Index", "Registration")" data-form="#filterForm">
+      <form id="filterForm" class="row g-2 mb-3">
+        <div class="col-12 col-md-4"><input name="q" class="form-control" placeholder="@L["SearchHint"]" /></div>
+        <div class="col-6 col-md-4"><select name="maHK" class="form-select" asp-items="(IEnumerable<SelectListItem>)ViewBag.HocKys"></select></div>
+        <div class="col-auto d-flex align-items-center"><div class="form-check"><input class="form-check-input" type="checkbox" name="chiDaDangKy" value="true" id="chkMine" /><label class="form-check-label" for="chkMine">@L["OnlyRegistered"]</label></div></div>
+        <div class="col-auto"><button class="btn btn-primary" type="submit"><i class="bi bi-funnel"></i> @L["Filter"]</button></div>
+      </form>
+      <div class="list-container table-responsive">@await Html.PartialAsync("_Table", Model)</div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-5">
+    <div class="card shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <b><i class="bi bi-calendar3"></i> Thời khóa biểu của tôi</b>
+        <div class="btn-group btn-group-sm">
+          <button class="btn btn-outline-primary" id="btnPrev"><i class="bi bi-chevron-left"></i></button>
+          <span class="btn btn-light disabled">@L["Week"] <span id="lblTuan"></span></span>
+          <button class="btn btn-outline-primary" id="btnNext"><i class="bi bi-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="small text-muted mb-2" id="lblRange"></div>
+        <div id="previewInfo" class="alert alert-secondary py-2 small">Bấm <b>“Xem lịch”</b> ở một lớp học phần để xem trước lịch học trên thời khóa biểu, sau đó bấm <b>“Đăng ký”</b> để chọn lớp đó.</div>
+        <div class="table-responsive">
+          <table id="miniGrid" class="table table-bordered tkb tkb-mini text-center mb-0" data-ma="@ViewBag.Ma" data-mahk="@ViewBag.MaHK" data-tuan="@ViewBag.Tuan"></table>
+        </div>
+        <div class="small text-muted mt-2">Ô màu: lịch đã đăng ký · Ô nét đứt cam: lịch đang xem trước · Viền đỏ: bị trùng.</div>
+      </div>
+    </div>
+  </div>
+</div>
+@section Scripts {
+  <script src="~/js/tkb-core.js" asp-append-version="true"></script>
+  <script src="~/js/registration.js" asp-append-version="true"></script>
+}

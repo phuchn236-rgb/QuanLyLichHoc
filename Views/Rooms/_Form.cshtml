@@ -1,0 +1,9 @@
+@model PhongHoc
+@{ bool isNew = (bool)ViewData["IsNew"]; }
+<input asp-for="MaPhong" type="hidden" />
+<div class="row g-3">
+    <div class="col-md-6"><label asp-for="TenPhong" class="form-label"></label><input asp-for="TenPhong" type="text" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="LoaiPhong" class="form-label"></label><select asp-for="LoaiPhong" asp-items="@(new[] { new SelectListItem("Lý thuyết", "LT"), new SelectListItem("Thực hành", "TH") })" class="form-select"></select></div>
+    <div class="col-md-6"><label asp-for="SucChua" class="form-label"></label><input asp-for="SucChua" type="number" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="ToaNha" class="form-label"></label><input asp-for="ToaNha" type="text" class="form-control" /></div>
+</div>

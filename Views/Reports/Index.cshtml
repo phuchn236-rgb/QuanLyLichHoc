@@ -1,0 +1,65 @@
+@{
+    ViewData["Title"] = L["Reports"].Value;
+    var rooms = (List<ReportRow>)ViewBag.Rooms; var lecs = (List<ReportRow>)ViewBag.Lecturers; var enr = (List<EnrollRow>)ViewBag.Enroll;
+    int maHK = (int)ViewBag.MaHK;
+    double tb = rooms.Count == 0 ? 0 : Math.Round(rooms.Average(r => r.TyLe), 1);
+}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
+  <h3 class="mb-0"><i class="bi bi-bar-chart"></i> @L["Reports"]</h3>
+  <form method="get" class="d-flex gap-2"><select name="maHK" class="form-select" asp-items="(IEnumerable<SelectListItem>)ViewBag.HocKys" onchange="this.form.submit()"></select>
+    <button type="button" class="btn btn-outline-secondary" onclick="window.print()"><i class="bi bi-printer"></i> @L["Print"]</button>
+    <a class="btn btn-outline-warning" asp-action="Health"><i class="bi bi-heart-pulse"></i> Kiểm tra dữ liệu</a></form>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3"><div class="card text-center shadow-sm"><div class="card-body"><div class="fs-3 fw-bold text-primary">@rooms.Sum(r => r.SoBuoi)</div><div class="text-muted">Buổi học / tuần</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card text-center shadow-sm"><div class="card-body"><div class="fs-3 fw-bold text-success">@rooms.Count(r => r.SoBuoi > 0)/@rooms.Count</div><div class="text-muted">Phòng đang được sử dụng</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card text-center shadow-sm"><div class="card-body"><div class="fs-3 fw-bold text-info">@tb.ToString("0.#")%</div><div class="text-muted">Công suất phòng trung bình</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card text-center shadow-sm"><div class="card-body"><div class="fs-3 fw-bold text-secondary">@enr.Sum(e => e.SiSo) <small class="fs-6 text-muted">lượt</small> / @ViewBag.SoSVDangKy <small class="fs-6 text-muted">SV</small></div><div class="text-muted">Đăng ký học phần (lượt / số sinh viên)</div></div></div></div>
+</div>
+
+<div class="row g-4">
+  <div class="col-12 col-xl-6">
+    <div class="card"><div class="card-header d-flex justify-content-between"><b>Công suất sử dụng phòng học</b>
+      <a class="btn btn-sm btn-outline-success no-print" asp-action="ExportCsv" asp-route-maHK="@maHK" asp-route-loai="phong"><i class="bi bi-file-earmark-excel"></i> Excel (CSV)</a></div>
+      <div class="card-body"><div style="height:240px"><canvas id="chartRooms"></canvas></div></div>
+      <div class="table-responsive"><table class="table table-sm mb-0"><thead><tr><th>Phòng</th><th>Buổi/tuần</th><th>Tiết/tuần</th><th>Tổng tiết HK</th><th>Công suất</th></tr></thead><tbody>
+      @foreach (var r in rooms) { <tr><td>@r.Ten</td><td>@r.SoBuoi</td><td>@r.TietTuan</td><td>@r.TongTiet</td><td>@r.TyLe.ToString("0.#")%</td></tr> }
+      @if (rooms.Count == 0) { <tr><td colspan="5" class="text-center text-muted">@L["NoData"]</td></tr> }
+      </tbody></table></div></div>
+  </div>
+  <div class="col-12 col-xl-6">
+    <div class="card"><div class="card-header d-flex justify-content-between"><b>Khối lượng giảng dạy của giảng viên</b>
+      <a class="btn btn-sm btn-outline-success no-print" asp-action="ExportCsv" asp-route-maHK="@maHK" asp-route-loai="giangvien"><i class="bi bi-file-earmark-excel"></i> Excel (CSV)</a></div>
+      <div class="card-body"><div style="height:240px"><canvas id="chartLec"></canvas></div></div>
+      <div class="table-responsive"><table class="table table-sm mb-0"><thead><tr><th>Giảng viên</th><th>Buổi/tuần</th><th>Tiết/tuần</th><th>Tổng tiết HK</th></tr></thead><tbody>
+      @foreach (var r in lecs) { <tr><td>@r.Ten</td><td>@r.SoBuoi</td><td>@r.TietTuan</td><td>@r.TongTiet</td></tr> }
+      @if (lecs.Count == 0) { <tr><td colspan="4" class="text-center text-muted">@L["NoData"]</td></tr> }
+      </tbody></table></div></div>
+  </div>
+  <div class="col-12">
+    <div class="card"><div class="card-header d-flex justify-content-between"><b>Sĩ số các lớp học phần</b>
+      <a class="btn btn-sm btn-outline-success no-print" asp-action="ExportCsv" asp-route-maHK="@maHK" asp-route-loai="lop"><i class="bi bi-file-earmark-excel"></i> Excel (CSV)</a></div>
+      <div class="table-responsive"><table class="table table-sm mb-0 align-middle"><thead><tr><th>Mã LHP</th><th>Môn học</th><th>Giảng viên</th><th>Đã đăng ký</th><th style="width:28%">Tỷ lệ lấp đầy</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+      @foreach (var e in enr) { <tr><td>@e.MaLHP</td><td>@e.TenMon</td><td>@e.GiangVien</td><td>@e.SiSo/@e.SiSoToiDa</td>
+        <td><div class="progress" style="height:14px"><div class="progress-bar @(e.TyLe >= 90 ? "bg-danger" : e.TyLe >= 60 ? "bg-warning" : "bg-success")" style="width:@(e.TyLe.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture))%">@e.TyLe.ToString("0.#")%</div></div></td><td>@e.TrangThai</td><td class="text-end no-print"><button type="button" class="btn btn-sm btn-outline-primary btn-enrolled" data-lhp="@e.MaLHP" data-hk="@maHK"><i class="bi bi-people"></i> Sinh viên</button></td></tr> }
+      @if (enr.Count == 0) { <tr><td colspan="7" class="text-center text-muted">@L["NoData"]</td></tr> }
+      </tbody></table></div></div>
+  </div>
+</div>
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.js"></script>
+<script>
+if (window.Chart) {
+  new Chart(document.getElementById('chartRooms'), { type: 'bar',
+    data: { labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(rooms.Select(r => r.Ten))), datasets: [{ label: 'Công suất (%)', data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(rooms.Select(r => r.TyLe))), backgroundColor: '#0d6efd' }] },
+    options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } } } });
+  new Chart(document.getElementById('chartLec'), { type: 'bar',
+    data: { labels: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(lecs.Select(r => r.Ten))), datasets: [{ label: 'Tổng số tiết học kỳ', data: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(lecs.Select(r => r.TongTiet))), backgroundColor: '#198754' }] },
+    options: { maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true } } } });
+} else {
+  document.getElementById('chartRooms').parentElement.innerHTML = '<div class="text-muted small">Không tải được thư viện biểu đồ (cần Internet). Bảng số liệu bên dưới vẫn đầy đủ.</div>';
+  document.getElementById('chartLec').parentElement.innerHTML = '<div class="text-muted small">Không tải được thư viện biểu đồ (cần Internet).</div>';
+}
+</script>
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AppName" xml:space="preserve"><value>Quản lý lịch học</value></data>
+  <data name="Home" xml:space="preserve"><value>Trang chủ</value></data>
+  <data name="Timetable" xml:space="preserve"><value>Thời khóa biểu</value></data>
+  <data name="Register" xml:space="preserve"><value>Đăng ký học phần</value></data>
+  <data name="Lookup" xml:space="preserve"><value>Tra cứu lịch học</value></data>
+  <data name="Login" xml:space="preserve"><value>Đăng nhập</value></data>
+  <data name="Logout" xml:space="preserve"><value>Đăng xuất</value></data>
+  <data name="Profile" xml:space="preserve"><value>Hồ sơ cá nhân</value></data>
+  <data name="Hello" xml:space="preserve"><value>Xin chào</value></data>
+  <data name="Search" xml:space="preserve"><value>Tìm kiếm</value></data>
+  <data name="SearchHint" xml:space="preserve"><value>Từ khóa...</value></data>
+  <data name="Filter" xml:space="preserve"><value>Lọc</value></data>
+  <data name="Add" xml:space="preserve"><value>Thêm mới</value></data>
+  <data name="Edit" xml:space="preserve"><value>Sửa</value></data>
+  <data name="Delete" xml:space="preserve"><value>Xóa</value></data>
+  <data name="Save" xml:space="preserve"><value>Lưu</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Hủy</value></data>
+  <data name="Close" xml:space="preserve"><value>Đóng</value></data>
+  <data name="Print" xml:space="preserve"><value>In / Lưu PDF</value></data>
+  <data name="Actions" xml:space="preserve"><value>Thao tác</value></data>
+  <data name="Total" xml:space="preserve"><value>Tổng số</value></data>
+  <data name="NoData" xml:space="preserve"><value>Không có dữ liệu</value></data>
+  <data name="ConfirmDelete" xml:space="preserve"><value>Bạn có chắc chắn muốn xóa?</value></data>
+  <data name="Saved" xml:space="preserve"><value>Đã lưu thành công</value></data>
+  <data name="Deleted" xml:space="preserve"><value>Đã xóa</value></data>
+  <data name="Semester" xml:space="preserve"><value>Học kỳ</value></data>
+  <data name="Week" xml:space="preserve"><value>Tuần</value></data>
+  <data name="Day" xml:space="preserve"><value>Thứ</value></data>
+  <data name="Period" xml:space="preserve"><value>Tiết</value></data>
+  <data name="Room" xml:space="preserve"><value>Phòng</value></data>
+  <data name="Lecturer" xml:space="preserve"><value>Giảng viên</value></data>
+  <data name="Subject" xml:space="preserve"><value>Môn học</value></data>
+  <data name="Section" xml:space="preserve"><value>Lớp học phần</value></data>
+  <data name="Time" xml:space="preserve"><value>Thời gian</value></data>
+  <data name="Weeks" xml:space="preserve"><value>Tuần học</value></data>
+  <data name="All" xml:space="preserve"><value>Tất cả</value></data>
+  <data name="Username" xml:space="preserve"><value>Tên đăng nhập</value></data>
+  <data name="Password" xml:space="preserve"><value>Mật khẩu</value></data>
+  <data name="RememberMe" xml:space="preserve"><value>Ghi nhớ đăng nhập</value></data>
+  <data name="LoginTitle" xml:space="preserve"><value>Đăng nhập hệ thống</value></data>
+  <data name="DemoAccounts" xml:space="preserve"><value>Tài khoản dùng thử</value></data>
+  <data name="Catalogs" xml:space="preserve"><value>Danh mục</value></data>
+  <data name="Training" xml:space="preserve"><value>Đào tạo</value></data>
+  <data name="Rooms" xml:space="preserve"><value>Phòng học</value></data>
+  <data name="Subjects" xml:space="preserve"><value>Môn học</value></data>
+  <data name="Semesters" xml:space="preserve"><value>Học kỳ</value></data>
+  <data name="Faculties" xml:space="preserve"><value>Khoa</value></data>
+  <data name="Classes" xml:space="preserve"><value>Lớp</value></data>
+  <data name="Lecturers" xml:space="preserve"><value>Giảng viên</value></data>
+  <data name="Students" xml:space="preserve"><value>Sinh viên</value></data>
+  <data name="Sections" xml:space="preserve"><value>Lớp học phần</value></data>
+  <data name="Schedules" xml:space="preserve"><value>Xếp lịch học</value></data>
+  <data name="Users" xml:space="preserve"><value>Tài khoản</value></data>
+  <data name="Reports" xml:space="preserve"><value>Báo cáo</value></data>
+  <data name="Logs" xml:space="preserve"><value>Nhật ký</value></data>
+  <data name="MyClasses" xml:space="preserve"><value>Lớp giảng dạy</value></data>
+  <data name="Busy" xml:space="preserve"><value>Lịch bận</value></data>
+  <data name="Welcome" xml:space="preserve"><value>Chào mừng đến với hệ thống quản lý lịch học</value></data>
+  <data name="WelcomeSub" xml:space="preserve"><value>Xếp lịch, đăng ký học phần và tra cứu thời khóa biểu nhanh chóng, không trùng lịch.</value></data>
+  <data name="CurrentSemester" xml:space="preserve"><value>Học kỳ hiện tại</value></data>
+  <data name="PrevWeek" xml:space="preserve"><value>Tuần trước</value></data>
+  <data name="NextWeek" xml:space="preserve"><value>Tuần sau</value></data>
+  <data name="Credits" xml:space="preserve"><value>Tín chỉ</value></data>
+  <data name="Capacity" xml:space="preserve"><value>Sĩ số</value></data>
+  <data name="Status" xml:space="preserve"><value>Trạng thái</value></data>
+  <data name="Unregister" xml:space="preserve"><value>Hủy đăng ký</value></data>
+  <data name="OnlyRegistered" xml:space="preserve"><value>Chỉ lớp đã đăng ký</value></data>
+  <data name="AccessDenied" xml:space="preserve"><value>Bạn không có quyền truy cập trang này</value></data>
+  <data name="ChangePassword" xml:space="preserve"><value>Đổi mật khẩu</value></data>
+  <data name="CurrentPassword" xml:space="preserve"><value>Mật khẩu hiện tại</value></data>
+  <data name="NewPassword" xml:space="preserve"><value>Mật khẩu mới</value></data>
+  <data name="ConfirmPassword" xml:space="preserve"><value>Xác nhận mật khẩu mới</value></data>
+  <data name="Footer" xml:space="preserve"><value>Bài tập lớn Lập trình Web</value></data>
+</root>

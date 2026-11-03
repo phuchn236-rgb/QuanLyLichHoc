@@ -1,0 +1,18 @@
+@model IPaged
+<div class="d-flex justify-content-between align-items-center mt-2">
+    <small class="text-muted">@L["Total"]: @Model.TotalCount</small>
+    @if (Model.TotalPages > 1)
+    {
+        int from = Math.Max(1, Model.PageIndex - 2), to = Math.Min(Model.TotalPages, Model.PageIndex + 2);
+        <nav>
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")"><a class="page-link pager-link" href="#" data-page="@(Model.PageIndex - 1)">&laquo;</a></li>
+                @for (int p = from; p <= to; p++)
+                {
+                    <li class="page-item @(p == Model.PageIndex ? "active" : "")"><a class="page-link pager-link" href="#" data-page="@p">@p</a></li>
+                }
+                <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")"><a class="page-link pager-link" href="#" data-page="@(Model.PageIndex + 1)">&raquo;</a></li>
+            </ul>
+        </nav>
+    }
+</div>

@@ -1,0 +1,42 @@
+@model NguoiDung
+@{
+    ViewData["Title"] = L["Profile"].Value;
+    var sv = ViewBag.SV as SinhVien; var gv = ViewBag.GV as GiangVien;
+}
+<div class="row g-4">
+  <div class="col-12 col-lg-6">
+    <div class="card"><div class="card-header fw-bold">@L["Profile"]</div>
+      <table class="table mb-0">
+        <tr><th style="width:35%">@L["Username"]</th><td>@Model.TenDangNhap</td></tr>
+        <tr><th>Họ tên</th><td>@Model.HoTen</td></tr>
+        <tr><th>Vai trò</th><td>@Model.VaiTro</td></tr>
+        @if (sv != null) { <tr><th>Mã SV</th><td>@sv.MaSV</td></tr><tr><th>Lớp</th><td>@sv.Lop?.TenLop (@sv.Lop?.Khoa?.TenKhoa)</td></tr><tr><th>Email</th><td>@sv.Email</td></tr><tr><th>Ngày sinh</th><td>@sv.NgaySinh.ToString("dd/MM/yyyy")</td></tr> }
+        @if (gv != null) { <tr><th>Mã GV</th><td>@gv.MaGV</td></tr><tr><th>Khoa</th><td>@gv.Khoa?.TenKhoa</td></tr><tr><th>Email</th><td>@gv.Email</td></tr><tr><th>Điện thoại</th><td>@gv.SoDienThoai</td></tr> }
+      </table>
+    </div>
+  </div>
+  <div class="col-12 col-lg-5">
+    <div class="card"><div class="card-header fw-bold">@L["ChangePassword"]</div>
+      <div class="card-body">
+        <form id="pwForm">
+          <div class="mb-3"><label class="form-label">@L["CurrentPassword"]</label><input type="password" name="MatKhauCu" class="form-control" required /></div>
+          <div class="mb-3"><label class="form-label">@L["NewPassword"]</label><input type="password" name="MatKhauMoi" class="form-control" minlength="8" required /></div>
+          <div class="mb-3"><label class="form-label">@L["ConfirmPassword"]</label><input type="password" name="XacNhan" class="form-control" required /></div>
+          <div id="pwErr" class="alert alert-danger d-none"></div>
+          <button type="submit" class="btn btn-primary">@L["Save"]</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@section Scripts {
+<script>
+$('#pwForm').on('submit', function (e) {
+    e.preventDefault();
+    $.post('/Account/ChangePassword', $(this).serialize(), function (r) {
+        if (r.ok) { $('#pwErr').addClass('d-none'); $('#pwForm')[0].reset(); showToast(window.I18N.saved); }
+        else $('#pwErr').removeClass('d-none').html(r.errors.join('<br>'));
+    });
+});
+</script>
+}

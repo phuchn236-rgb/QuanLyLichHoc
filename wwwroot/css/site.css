@@ -1,0 +1,23 @@
+body { background: #f6f8fb; }
+.card { border-radius: .6rem; }
+table.tkb { table-layout: fixed; min-width: 900px; background: #fff; }
+table.tkb th { background: #e7efff; vertical-align: middle; }
+table.tkb td { height: 54px; padding: 2px; vertical-align: middle; }
+table.tkb td.slot-busy { color: #1b1b1b; font-size: .85rem; border-radius: 6px; }
+.pager-link { cursor: pointer; }
+@media print {
+  .no-print, .navbar, footer { display: none !important; }
+  body { background: #fff; }
+  main { padding: 0 !important; }
+  table.tkb { min-width: 0; font-size: 11px; }
+}
+
+/* Lưới mini + xem trước đăng ký */
+table.tkb-mini { min-width: 560px; font-size: .72rem; }
+table.tkb-mini td { height: 34px; }
+table.tkb-mini th { padding: 2px; font-size: .7rem; }
+table.tkb td.slot-preview {
+    background: repeating-linear-gradient(45deg, #fff3cd, #fff3cd 8px, #ffe69c 8px, #ffe69c 16px) !important;
+    border: 2px dashed #fd7e14 !important;
+}
+table.tkb td.slot-conflict { outline: 3px solid #dc3545; outline-offset: -3px; }

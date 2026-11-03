@@ -1,0 +1,9 @@
+@model HocKy
+@{ bool isNew = (bool)ViewData["IsNew"]; }
+<input asp-for="MaHK" type="hidden" />
+<div class="row g-3">
+    <div class="col-md-6"><label asp-for="TenHK" class="form-label"></label><input asp-for="TenHK" type="text" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="NamHoc" class="form-label"></label><input asp-for="NamHoc" type="text" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="NgayBatDau" class="form-label"></label><input asp-for="NgayBatDau" type="date" class="form-control" /></div>
+    <div class="col-md-6"><label asp-for="NgayKetThuc" class="form-label"></label><input asp-for="NgayKetThuc" type="date" class="form-control" /></div>
+</div>
